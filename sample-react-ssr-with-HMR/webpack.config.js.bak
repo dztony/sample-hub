@@ -1,0 +1,110 @@
+const path = require('path');
+const webpack = require('webpack');
+
+const PluginHtmlWebpack = require('html-webpack-plugin');
+const PluginMiniCssExtract = require("mini-css-extract-plugin");
+const PluginTerser = require('terser-webpack-plugin');
+const PluginCssMinimizer = require('css-minimizer-webpack-plugin');
+
+module.exports = {
+  mode: 'production',
+  entry: './src/index.jsx',
+  output: {
+    assetModuleFilename: "asset_[name]_[contenthash:8][ext]",
+    filename: (pathData) => {
+      let currentChunkName = pathData.chunk.name;
+      if (!currentChunkName) {
+        return 'chunk_[id]_[contenthash:8].js';
+      } else if (currentChunkName === 'main') {
+        return 'entry_[contenthash:8].js';
+      } else {
+        return '[name]_[contenthash:8].js';
+      }
+    },
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+    chunkFilename: "chunk_[name]_[contenthash:8].js",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          PluginMiniCssExtract.loader,
+          // 'style-loader',
+          'css-loader'
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.DEMO_ENV': JSON.stringify(true),
+    }),
+    new PluginMiniCssExtract({
+      filename: 'css_[name]_[contenthash:8].css',
+      chunkFilename: 'css_chunk_[name]_[contenthash:8].css'
+    }),
+    new PluginHtmlWebpack({
+      title: 'Caching',
+    }),
+  ],
+  // devtool: "inline-source-map",
+  optimization: {
+    chunkIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: "all", // 分包策略对 initial chunk 和 async chunk 都生效
+      minSize: 2,
+      cacheGroups: {
+        lodash: {
+          test: /[\\/]node_modules[\\/](lodash)[\\/]/,
+          name: 'lib_lodash',
+          priority: 1, // 优先级，如果模块命中多个缓存组配置，则优先被分配到优先级大的缓存组
+        },
+        // react: {
+        //   test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+        //   name: 'react',
+        //   priority: 1, // 优先级，如果模块命中多个缓存组配置，则优先被分配到优先级大的缓存组
+        // },
+        nanoid: {
+          test: /[\\/]node_modules[\\/](nanoid)[\\/]/,
+          name: 'lib_nanoid',
+          priority: 1, // 优先级，如果模块命中多个缓存组配置，则优先被分配到优先级大的缓存组
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/][\\/]/,
+          name: 'lib~vendors',
+          priority: 0, // 优先级，如果模块命中多个缓存组配置，则优先被分配到优先级大的缓存组
+        },
+      }
+    },
+    minimize: true,
+    minimizer: [
+      new PluginTerser({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+      new PluginCssMinimizer({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: {
+                removeAll: true,
+              }
+            },
+          ],
+        },
+      }),
+    ]
+  }
+};
