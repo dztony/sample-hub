@@ -1,0 +1,5 @@
+$color: red;
+
+@function vw($px) {
+  @return ($px / 390) * 100vw;
+}
