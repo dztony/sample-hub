@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "rollupBuilder/",
+    ""
+  ],
+  "exec": "rollup --config rollupBuilder/rollup.config.mjs",
+  "ext": "*"
+}

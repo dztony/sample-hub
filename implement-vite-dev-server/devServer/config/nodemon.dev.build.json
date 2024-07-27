@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "devServer/src/",
+    "devServer/script/devBuild.mjs"
+  ],
+  "exec": "node devServer/script/devBuild.mjs",
+  "ext": "*"
+}
