@@ -1,20 +1,18 @@
 import { PropsWithChildren } from "react";
-
 import css from './index.module.scss';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 function Layout(props: PropsWithChildren) {
   return (
     <div className={css.layout}>
-      <header className={css.header}>
-        头部
-      </header>
+      <Header />
 
       <div className={css.main}>
         {props.children}
       </div>
-      <footer className={css.footer}>
 
-      </footer>
+      <Footer />
     </div>
   );
 }
