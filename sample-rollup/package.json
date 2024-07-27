@@ -1,0 +1,40 @@
+{
+  "name": "rollup-app01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "rollup -c rollup.config.js --environment ENV_MODE:dev -w",
+    "build": "rollup -c rollup.config.js --environment ENV_NODE:prod",
+    "build:my": "node buildByMyRollup.js",
+    "build:test": "node buildAndGenerate.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-react": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-image": "^3.0.3",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^20.11.0",
+    "express": "^4.18.2",
+    "postcss": "^8.4.33",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.69.7"
+  },
+  "dependencies": {
+    "acorn": "8.0.1",
+    "acorn-walk": "^8.3.2",
+    "escodegen": "^2.1.0",
+    "lodash-es": "^4.17.21",
+    "magic-string": "0.25.7"
+  }
+}
