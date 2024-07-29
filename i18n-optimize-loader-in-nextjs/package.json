@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "dev:key": "cross-env splitKey=true next dev",
+    "build:key": "cross-env splitKey=true next build",
     "start": "next start",
     "lint": "next lint",
     "ana": "cross-env ANALYZE=true next build",

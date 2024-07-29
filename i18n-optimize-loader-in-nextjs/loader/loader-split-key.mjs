@@ -18,7 +18,7 @@ let loaderOptions = null;
 export default function loaderSplitKey(source) {
   // const currentResourcePath = this.resource;
   //
-  // if (!currentResourcePath.endsWith('/pages/index.tsx')) {
+  // if (!currentResourcePath.endsWith('/util/lang.ts')) {
   //   return source;
   // }
 
@@ -69,6 +69,13 @@ export default function loaderSplitKey(source) {
           parentFunctionDeclaration.insertBefore(translationDictDefineAst);
           oldTranslationHookPath.replaceWithSourceString(`${loaderOptions.replaceHook.name}(${GlobalName.translationDict})`);
         }
+      }
+    },
+    VariableDeclarator(path) {
+      if (path.node.id.name === loaderOptions.translationMapperName) {
+        // console.log('path.parentPath - ', path.parentPath);
+        const replaceDefineStr = `${loaderOptions.translationMapperName} = {}`;
+        path.replaceWithSourceString(replaceDefineStr);
       }
     },
   });

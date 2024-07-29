@@ -11,9 +11,9 @@ export enum EnumLang {
 }
 
 export const TranslationMapper = {
-  // [EnumLang.en]: require(`@/locales/${LocalesMapper[EnumLang.en]}`),
-  // [EnumLang.cn]: require(`@/locales/${LocalesMapper[EnumLang.cn]}`),
-  // [EnumLang.tw]: require(`@/locales/${LocalesMapper[EnumLang.tw]}`),
+  [EnumLang.en]: require(`@/locales/${LocalesMapper[EnumLang.en]}`),
+  [EnumLang.cn]: require(`@/locales/${LocalesMapper[EnumLang.cn]}`),
+  [EnumLang.tw]: require(`@/locales/${LocalesMapper[EnumLang.tw]}`),
 };
 
 export const I18nContext = React.createContext<II18nContext>({

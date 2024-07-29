@@ -4,7 +4,21 @@
 
 ## 命令
 ```shell
-# 
+## 未使用多语言 key 拆分策略
+# 启动
+pnpm run dev
+# 打包
+pnpm run build
+# 生产服务器启动
+pnpm run start
+
+## 使用了多语言 key 拆分策略
+# 启动
+pnpm run dev:key
+# 打包
+pnpm run build:key
+# 生产服务器启动
+pnpm run start
 ```
 
 
