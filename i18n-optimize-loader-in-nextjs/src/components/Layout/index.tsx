@@ -18,7 +18,7 @@ function Layout(props: PropsWithChildren) {
           {props.children}
         </div>
 
-        <Footer/>
+        <Footer />
       </div>
     </I18nProvider>
 

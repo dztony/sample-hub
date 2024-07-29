@@ -6,6 +6,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+i18n-optimize-loader-in-nextjs/analyze
 
 # testing
 /coverage

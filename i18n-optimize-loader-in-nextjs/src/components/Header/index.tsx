@@ -33,9 +33,14 @@ function Header() {
       <button onClick={() => handleSwitchLocale(EnumLang.tw)}>繁体中文</button>
 
       <br />
+      <h3>多语言翻译</h3>
       <div>
-        翻译 key1 - {t('key1')}
+        头部中使用的 key1 - {t('key1')}
       </div>
+
+      <div>{t('key10')}</div>
+      <div>{t('key199')}</div>
+      <div>{t('key201')}</div>
     </header>
   );
 }
