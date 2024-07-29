@@ -18,7 +18,7 @@ function __main() {
 }
 
 function translationGenerator(curLang) {
-  const targetArray = Array(3000).fill(0);
+  const targetArray = Array(4000).fill(0);
   const res = {};
 
   targetArray.forEach((item, index) => {
