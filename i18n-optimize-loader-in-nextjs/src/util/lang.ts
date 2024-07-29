@@ -1,4 +1,5 @@
 import { enUS, zhTW, zhCN, LocalesMapper } from '../../config/locale.config.mjs';
+import React from 'react';
 
 export enum EnumLang {
   // @ts-ignore
@@ -15,3 +16,12 @@ export const TranslationMapper = {
   [EnumLang.tw]: require(`@/locales/${LocalesMapper[EnumLang.tw]}`),
 };
 
+export const I18nContext = React.createContext<II18nContext>({
+  langDict: null,
+});
+
+export const I18nProvider = I18nContext.Provider;
+
+type II18nContext = {
+  langDict: Record<EnumLang, Record<string, string>> | null;
+};
