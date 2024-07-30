@@ -1,4 +1,6 @@
 import webpack from 'webpack';
+import PluginMiniCssExtract from 'mini-css-extract-plugin';
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -28,34 +30,35 @@ export default {
           },
         },
       },
-      // {
-      //   test: /\.(sass|scss|css)$/i,
-      //   use: [
-      //     // 'style-loader',
-      //     PluginMiniCssExtract.loader,
-      //     {
-      //       loader: 'css-loader',
-      //       options: {
-      //         modules: {
-      //           mode: 'local',
-      //           auto: true,
-      //           localIdentName: '[local]_[contenthash:8]',
-      //         },
-      //       },
-      //     },
-      //     {
-      //       loader: 'sass-loader',
-      //       options: {
-      //         sassOptions: {
-      //
-      //         },
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.(sass|scss|css)$/i,
+        use: [
+          // 'style-loader',
+          PluginMiniCssExtract.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                auto: true,
+                localIdentName: '[local]_[contenthash:8]',
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                module: true,
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env.mode': JSON.stringify(isProd ? 'production' : 'development'),
     }),

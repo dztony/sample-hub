@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import Icon from '../../asset/icon.jpg';
+import * as css from './index.module.scss';
 
 function Home() {
   const [count, setCount] = useState(123);
@@ -13,7 +14,7 @@ function Home() {
   }
 
   return (
-    <div id={'home-app'}>
+    <div id={'home-app'} className={css.home}>
       Home page 888888
 
       {/*<img src={Icon} />*/}
