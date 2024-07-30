@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import PluginMiniCssExtract from 'mini-css-extract-plugin';
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -58,7 +57,7 @@ export default {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new PluginMiniCssExtract(),
     new webpack.DefinePlugin({
       'process.env.mode': JSON.stringify(isProd ? 'production' : 'development'),
     }),
