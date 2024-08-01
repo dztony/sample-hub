@@ -4,20 +4,6 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const cssLoaders = [
-  MiniCssExtractPlugin.loader,
-  {
-    loader: 'css-loader',
-    options: {
-      modules: {
-        auto: true,
-        localIdentName: '[local]_[contenthash:base64:5]',
-      },
-      esModule: false,
-    },
-  },
-];
-
 export default {
   module: {
     rules: [
@@ -45,13 +31,19 @@ export default {
         },
       },
       {
-        test: /\.css$/,
-        use: cssLoaders,
-      },
-      {
-        test: /\.scss$/i,
+        test: /\.(css|scss|sass)$/i,
         use: [
-          ...cssLoaders,
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: '[local]_[contenthash:base64:5]',
+              },
+              esModule: false,
+            },
+          },
           {
             loader: 'sass-loader',
           },
