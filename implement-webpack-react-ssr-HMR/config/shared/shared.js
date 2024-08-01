@@ -1,7 +1,22 @@
 import webpack from 'webpack';
 import PluginMiniCssExtract from 'mini-css-extract-plugin';
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
+
+const cssLoaders = [
+  MiniCssExtractPlugin.loader,
+  {
+    loader: 'css-loader',
+    options: {
+      modules: {
+        auto: true,
+        localIdentName: '[local]_[contenthash:base64:5]',
+      },
+      esModule: false,
+    },
+  },
+];
 
 export default {
   module: {
@@ -30,27 +45,15 @@ export default {
         },
       },
       {
-        test: /\.(sass|scss|css)$/i,
+        test: /\.css$/,
+        use: cssLoaders,
+      },
+      {
+        test: /\.scss$/i,
         use: [
-          // 'style-loader',
-          PluginMiniCssExtract.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                mode: 'local',
-                auto: true,
-                localIdentName: '[local]_[contenthash:8]',
-              },
-            },
-          },
+          ...cssLoaders,
           {
             loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                module: true,
-              },
-            },
           },
         ],
       },
